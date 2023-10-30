@@ -1,0 +1,26 @@
+version: '3'
+services:
+   spring-boot:
+    image: foodsystem
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    container_name: foodsystem
+    expose:
+      - 8080
+    restart: always
+   db:
+    image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+     - db_data:/var/lib/mysql
+    restart: always
+    environment:
+     - MYSQL_ROOT_PASSWORD=danTeste123@
+     - MYSQL_DATABASE=foodsystem
+     - MYSQL_USER=danTeste123@
+     - MYSQL_PASSWORD=danTeste123@
+    expose: 
+     - 3306 
+     - 33060
+    
