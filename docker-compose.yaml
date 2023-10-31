@@ -1,26 +1,31 @@
 version: '3'
 services:
-   spring-boot:
-    image: foodsystem
+  mysqldb:
+    container_name: mysql8-teste
+    image: mysql:8.0
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: foodSystem123@
+      MYSQL_DATABASE: foodsystemuser
+      MYSQL_USER: foodsystemuser
+      MYSQL_PASSWORD: foodSystem123@
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+          - mysqldb:/var/lib/mysql
+    ports:
+      - '3306:3306'
+  spring-boot:
+    image: v3
     build:
       context: . 
       dockerfile: Dockerfile
-    container_name: foodsystem
-    expose:
-      - 8080
-    restart: always
-   db:
-    image: mysql:8.0.27
-    command: '--default-authentication-plugin=mysql_native_password'
-    volumes:
-     - db_data:/var/lib/mysql
+    container_name: v3
+    ports:
+      - "8080:8080" 
     restart: always
     environment:
-     - MYSQL_ROOT_PASSWORD=danTeste123@
-     - MYSQL_DATABASE=foodsystem
-     - MYSQL_USER=danTeste123@
-     - MYSQL_PASSWORD=danTeste123@
-    expose: 
-     - 3306 
-     - 33060
-    
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/foodsystem?autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: foodsystemuser
+      SPRING_DATASOURCE_PASSWORD: foodSystem123@
+volumes:
+  mysqldb:

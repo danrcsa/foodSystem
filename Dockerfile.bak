@@ -1,4 +1,0 @@
-FROM eclipse-temurin:11
-RUN mkdir /opt/app
-COPY target/foodsystem-2.1.2.RELEASE.jar /opt/app
-CMD ["java", "-jar", "/opt/app/foodsystem-2.1.2.RELEASE.jar"]
