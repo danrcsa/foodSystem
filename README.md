@@ -17,10 +17,17 @@ E então inicar o pacote do projeto Food System.
 
 segue lista de comandos necessarios para iniciar o projeto da maneira correta 
 
+Criando a rede para comunicação dos projetos
+
 	docker network create foodsystem
 
-	docker run -d --name mysqldb -p 3307:3306  --network foodsystem -e MYSQL_ROOT_PASSWORD=foodSystem123@ -e MYSQL_DATABASE=foodsystem -e MYSQL_USER=foodsystemuser -e MYSQL_PASSWORD=foodSystem123@ mysql/mysql-server
+Criando mysql para armazenar dos dados do projeto 
 
-Para criar a imagem a partir do por
+	docker run -d --name mysqldb -p 8082:3306  --network foodsystem -e MYSQL_ROOT_PASSWORD=foodSystem123@ -e MYSQL_DATABASE=foodsystem -e MYSQL_USER=foodsystemuser -e MYSQL_PASSWORD=foodSystem123@ mysql/mysql-server
 
-		docker run -d --name spring-boot -p 8081:8081 --network foodsystem -e SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/foodsystem?autoReconnect=true -e SPRING_DATASOURCE_USERNAME=foodsystemuser -e SPRING_DATASOURCE_PASSWORD=foodSystem123@ danrcsa/foodsystem:1.0.1
+Para criar a imagem pode seguir o comando abaixo para baixar a imagem do projetog
+
+		docker run -d --name spring-boot -p 8081:8081 --network foodsystem -e SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/foodsystem?autoReconnect=true -e SPRING_DATASOURCE_USERNAME=foodsystemuser -e SPRING_DATASOURCE_PASSWORD=foodSystem123@ danrcsa/foodsystem:latest
+		
+1
+
