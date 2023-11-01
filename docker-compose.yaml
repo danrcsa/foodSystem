@@ -13,7 +13,7 @@ services:
     volumes:
           - mysqldb:/var/lib/mysql
     ports:
-      - '8081:3306'
+      - '8082:3306'
   spring-boot:
     image: foodsystem
     build:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: foodsystem
     ports:
-      - "8080:8080" 
+      - "8081:8081" 
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql8:3306/foodsystem?autoReconnect=true&useSSL=false
