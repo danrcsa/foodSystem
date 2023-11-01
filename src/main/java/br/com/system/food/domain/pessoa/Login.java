@@ -3,6 +3,7 @@ package br.com.system.food.domain.pessoa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Table(name="LOGIN")
 public class Login {
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name ="id_login")
 	@Id
 	private Long idLogin;

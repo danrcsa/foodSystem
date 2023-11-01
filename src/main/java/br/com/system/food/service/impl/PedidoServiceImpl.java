@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.system.food.configuration.NaoEncontradoException;
 import br.com.system.food.domain.enumerator.StatusPedidoEnum;
 import br.com.system.food.domain.pedido.Pedido;
 import br.com.system.food.domain.pedido.PedidoProduto;
@@ -40,7 +41,7 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	public Pedido recuperarPedido(Long idPedido) {
 		try {
-			Pedido pedido = repo.findById(idPedido).orElseThrow(Exception::new);
+			Pedido pedido = repo.findById(idPedido).orElseThrow(NaoEncontradoException::new);
 			pedido.setLsPedidoProduto(pedidoProdutoRepo.findByIdPedido(pedido.getIdPedido()));
 			pedido.setStatusPedidoEnum(StatusPedidoEnum.getByIdPedidoEnum(pedido.getIdStatusPedido()));
 			return pedido;
@@ -56,7 +57,7 @@ public class PedidoServiceImpl implements PedidoService {
 			dto.setBdValorPedido(dto.getBdValorPedido().add(produtoService.
 					recuperarProduto(pedidoProdutoDto.getIdProduto()).getBdValor()))
 		);
-		dto.setIdStatusPedido(StatusPedidoEnum.AGUARDANDO_PREPARACAO.getCodigo());
+		dto.setIdStatusPedido(StatusPedidoEnum.PEDIDO_CRIADO.getCodigo());
 		Pedido pedido = repo.save(mapper.pedido(dto, clienteService.recuperarClinte(dto.getIdCliente())));
 		
 		List<PedidoProduto> lsPedidoProduto = (List<PedidoProduto>) pedidoProdutoRepo.saveAll(pedidoProdutoMapper.lsPedidoProduto(
@@ -65,15 +66,10 @@ public class PedidoServiceImpl implements PedidoService {
 		return pedido;
 	}
 
-	@Override
-	public Pedido atualizarPedido(PedidoDto dto) {
-		return criarPedido(dto);
-	}
-
-	@Override
-	public void notificarCliente() {
-		
-	}
+//	@Override
+//	public Pedido atualizarPedido(Long idPedido, int idStatusPedido) {
+//		return repo.updateIdStatusPedido(idStatus, idPedido);
+//	}
 
 	@Override
 	public void movimentaPedido(Long idPedido, int idStatusPedido) {
@@ -90,6 +86,18 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	public List<Pedido> recuperarPedidoAberto() {
 		return repo.findByIdStatusPedidoNotIn(StatusPedidoEnum.ENTREGUE.getCodigo());
+	}
+
+	@Override
+	public void notificarCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Pedido atualizarPedido(int idPedido, Long idStatus) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,5 +1,8 @@
 package br.com.system.food.domain.enumerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLInsert;
 
 import br.com.system.food.configuration.NaoEncontradoException;
+import br.com.system.food.dto.EnumDto;
 import lombok.Getter;
 
 @Getter
@@ -47,6 +51,16 @@ public enum SetorEnum {
 	    }
 	    throw new NaoEncontradoException("Não encontrado valor condizente com o enum de setor");
 	}
+	
+	public static List<EnumDto> returnEnumValues() {
+		
+		List<EnumDto> lsEnumDto = new ArrayList<>();
+		for(SetorEnum e : values()) {
+			lsEnumDto.add(new EnumDto(e.codigo, e.nome));
+	    }
+	    return lsEnumDto;
+	}
+
 
 
 }

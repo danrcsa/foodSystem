@@ -15,6 +15,7 @@ public class PedidoMapper {
 		entidade.setNmAnotacaoPedido(dto.getNmAnotacaoPedido());
 		entidade.setCliente(cliente);
 		entidade.setBdValorPedido(dto.getBdValorPedido());
+		entidade.setIdStatusPedido(dto.getIdStatusPedido());
 		return entidade;
 	}
 }

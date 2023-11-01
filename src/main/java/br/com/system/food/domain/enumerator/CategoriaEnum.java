@@ -1,19 +1,20 @@
 package br.com.system.food.domain.enumerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.annotations.SQLInsert;
-
+import br.com.system.food.dto.EnumDto;
 import lombok.Getter;
 
 @Getter
 @Entity
 @Table(name="categoria")
-@SQLInsert(sql ="categoria.sql")
 public enum CategoriaEnum {
 	LANCHE(1, "Lanche"),
 	BEBIDA(2, "Bebida"),
@@ -46,4 +47,14 @@ public enum CategoriaEnum {
 	    }
 	    return null;
 	}
+	
+	public static List<EnumDto> returnEnumValues() {
+	
+		List<EnumDto> lsEnumDto = new ArrayList<>();
+		for(CategoriaEnum e : values()) {
+			lsEnumDto.add(new EnumDto(e.codigo, e.nome));
+	    }
+	    return lsEnumDto;
+	}
+
 }

@@ -13,7 +13,7 @@ public interface PedidoService {
 
 	Pedido recuperarPedido(Long idPedido);
 
-	Pedido atualizarPedido(PedidoDto dto);
+	Pedido atualizarPedido(int idPedido, Long idStatus);
 
 	void movimentaPedido(Long idPedido, int idStatusPedido);
 

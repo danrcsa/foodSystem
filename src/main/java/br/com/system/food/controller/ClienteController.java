@@ -22,31 +22,31 @@ public class ClienteController {
 
 	@Autowired
 	ClienteService clinteService;
-	
+
 	@GetMapping("")
 	public ResponseEntity<Cliente> recuperaCliente(
 			@RequestParam final Long idCliente) {
-		return new ResponseEntity<Cliente>(clinteService.recuperarClinte(idCliente), HttpStatus.OK);
+		return new ResponseEntity<>(clinteService.recuperarClinte(idCliente), HttpStatus.OK);
 
 	}
 	@PostMapping("criar")
 	public ResponseEntity<Cliente> criarCliente(
 			@RequestBody final ClienteDto clienteDto) {
-		return new ResponseEntity<Cliente>(clinteService.criarCliente(clienteDto), HttpStatus.CREATED);
+		return new ResponseEntity<>(clinteService.criarCliente(clienteDto), HttpStatus.CREATED);
 
 	}
 	@PostMapping("atualizar")
 	public ResponseEntity<Cliente> atualizarCliente(
 			@RequestBody(required = true) final ClienteDto clienteDto) {
 		
-		return new ResponseEntity<Cliente>(
+		return new ResponseEntity<>(
 				clinteService.atualizarCliente(clienteDto), HttpStatus.OK);
 	}
 	
 	@PostMapping("logar")
 	public ResponseEntity<Login> logarCliente(
 			@RequestBody final LoginDto login) {
-		return new ResponseEntity<Login>(clinteService.login(login), HttpStatus.ACCEPTED);		
+		return new ResponseEntity<>(clinteService.login(login), HttpStatus.ACCEPTED);		
 
 	}
 }

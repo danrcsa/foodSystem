@@ -40,10 +40,11 @@ public class PedidoController {
 
 	}
 
-	@PostMapping("/atualizar")
+	@PutMapping("/atualizar")
 	public ResponseEntity<Pedido> atualizaPedido(
-			@RequestBody final PedidoDto dto) {
-		return new ResponseEntity<Pedido>(service.atualizarPedido(dto), HttpStatus.OK);
+			@RequestParam final int idPedido,
+			@RequestParam final Long idStatus) {
+		return new ResponseEntity<Pedido>(service.atualizarPedido(idPedido, idStatus), HttpStatus.OK);
 	}
 	
 	@PostMapping("/encerrar")

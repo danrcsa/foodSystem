@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -36,7 +37,7 @@ public class Pedido implements Serializable{
 	private static final long serialVersionUID = 6829760369416857666L;
 	@Id
 	@Column(name = "id_pedido")
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Long idPedido;
 	@OneToOne
 	@JoinColumn(name = "id_cliente")

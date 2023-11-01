@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -30,7 +31,7 @@ public class Funcionario implements Serializable{
 	 */
 	private static final long serialVersionUID = -9212248770701036925L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name="id_funcionario")
 	private Long idFuncionario;
 	@OneToOne

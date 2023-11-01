@@ -1,5 +1,8 @@
 package br.com.system.food.domain.enumerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.SQLInsert;
 
+import br.com.system.food.dto.EnumDto;
 import lombok.Getter;
 
 @Getter
@@ -16,7 +20,7 @@ import lombok.Getter;
 @SQLInsert(sql ="status_pedido.sql")
 public enum StatusPedidoEnum {
 	
-	PEDIDO(1, "Pedido"),
+	PEDIDO_CRIADO(1, "Pedido criado"),
 	AGUARDANDO_PREPARACAO(2, "Aguardando preparação"),
 	PREPARANDO(3, "Preparando"),
 	FINALIZADO(4, "Finalizado"),
@@ -55,6 +59,15 @@ public enum StatusPedidoEnum {
 	        	return e;
 	    }
 	    return null;
+	}
+
+	public static List<EnumDto> returnEnumValues() {
+		
+		List<EnumDto> lsEnumDto = new ArrayList<>();
+		for(StatusPedidoEnum e : values()) {
+			lsEnumDto.add(new EnumDto(e.codigo, e.nome));
+	    }
+	    return lsEnumDto;
 	}
 
 }
